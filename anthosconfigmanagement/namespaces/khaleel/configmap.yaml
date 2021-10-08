@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: khaleel-configmap
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head>
+        <title>Cloud4C Services Pvt Ltd!</title>
+      </head>
+      <body>
+        <p><img src="https://www.cloud4c.com/sites/default/files/cloud4c_0.png"</p>
+      </body>
+    </html>

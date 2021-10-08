@@ -1,0 +1,76 @@
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSManagementService
+metadata:
+  name: management
+spec:
+  version: aws-1.6.0-gke.3
+  region: ${AWS_REGION}
+  authentication:
+    awsIAM:
+      adminIdentityARNs:
+      - ${ADMIN_AWS_IAM_ARN}
+  kmsKeyARN: ${KMS_KEY_ARN}
+  databaseEncryption:
+    kmsKeyARN: ${DATABASE_KMS_KEY_ARN}
+  googleCloud:
+    projectID: ${GCP_PROJECT_ID}
+    serviceAccountKeys:
+      managementService: ${MANAGEMENT_KEY_PATH}
+      connectAgent: ${HUB_KEY_PATH}
+      node: ${NODE_KEY_PATH}
+  dedicatedVPC:
+    vpcCIDRBlock: ${VPC_CIDR_BLOCK}
+    availabilityZones:
+    - ${AWS_ZONE_1}
+    - ${AWS_ZONE_2}
+    - ${AWS_ZONE_3}
+    privateSubnetCIDRBlocks:
+    - ${PRIVATE_CIDR_BLOCK_1}
+    - ${PRIVATE_CIDR_BLOCK_2}
+    - ${PRIVATE_CIDR_BLOCK_3}
+    publicSubnetCIDRBlocks:
+    - ${PUBLIC_CIDR_BLOCK_1}
+    - ${PUBLIC_CIDR_BLOCK_2}
+    - ${PUBLIC_CIDR_BLOCK_3}
+  # Optional
+  bastionHost:
+    allowedSSHCIDRBlocks:
+    - ${SSH_CIDR_BLOCK}
+  proxy: ${PROXY_JSON_FILE} # optional
+
+
+
+--------------------------------------------
+# Sample Code
+---
+ apiVersion: multicloud.cluster.gke.io/v1
+ kind: AWSManagementService
+ metadata:
+   name: management
+ spec:
+   version: aws-1.6.2-gke.0
+   region: us-west-2
+   authentication:
+     awsIAM:
+       adminIdentityARNs:
+       - arn:aws:iam::939571673831:user/anthos-user
+   kmsKeyARN: arn:aws:kms:us-west-2:939571673831:key/aad8e1e8-a33b-4a3b-xxx-xxxxxxxxxxx
+   databaseEncryption:
+     kmsKeyARN: arn:aws:kms:us-west-2:939571673831:key/aad8e1e8-a33b-4a3b-xxx-xxxxxxxxxxx
+   googleCloud:
+     projectID: c4c-sandbox-one
+     serviceAccountKeys:
+       managementService: management-key.json
+       connectAgent: hub-key.json
+       node: node-key.json
+   dedicatedVPC:
+     vpcCIDRBlock: 10.10.0.0/16
+     availabilityZones:
+     - us-west-2a
+     privateSubnetCIDRBlocks:
+     - 10.10.1.0/24
+     publicSubnetCIDRBlocks:
+     - 10.10.4.0/24
+   bastionHost:
+     allowedSSHCIDRBlocks:
+     - 0.0.0.0/0

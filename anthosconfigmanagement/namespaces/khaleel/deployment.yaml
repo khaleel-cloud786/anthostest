@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: khaleel
+spec:
+  selector:
+    matchLabels:
+      app: khaleel
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: khaleel
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/nginx/html
+      volumes:
+        - name: config-volume
+          configMap:
+            name: khaleel-configmap

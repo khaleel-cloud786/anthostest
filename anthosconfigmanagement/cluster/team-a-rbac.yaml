@@ -1,0 +1,14 @@
+apiVersion: rbacmanager.reactiveops.io/v1beta1
+kind: RBACDefinition
+metadata:
+  name: it-test
+rbacBindings:
+  - name: team-a
+    subjects:
+      - kind: User
+        name: it@cloud4c.com
+    roleBindings:
+      - namespace: khaleel
+        clusterRole: edit
+      - namespace: khaleel-store
+        clusterRole: read

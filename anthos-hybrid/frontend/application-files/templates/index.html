@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <style>
+            .content {
+                max-width: 800px;
+                margin: auto;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                color:rgb(105, 105, 105);
+            }
+            .image {
+                margin: auto;
+                text-align: center;
+            }
+        </style>
+        
+        <div class="image">
+            <img src="/code/templates/anthos.png" alt="anthos" width="200" height="250">
+        </div>
+
+        <div class="content">
+            <h1>Hybrid multi-cluster service mesh</h1>
+            <h2>{{ value }}</h2>
+            <p>This is a flask application which maintains a hit counter in redis and display the number of times the webpage was visited. The frontend flask server microservice is hosted on Google Kubernetes Engine cluster and the backend redis microservice is hosted on Anthos Cluster on AWS.</p>
+        </div>
+
+    </body>
+</html>
